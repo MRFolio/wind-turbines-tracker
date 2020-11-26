@@ -1,6 +1,6 @@
 import { Marker } from "@react-google-maps/api";
 
-const WindMill = ({ lat, lng, onClick, onCloseClick }) => {
+const WindMill = ({ lat, lng, onClick }) => {
   const iconOptions = {
     url: "/windmill.svg",
   };

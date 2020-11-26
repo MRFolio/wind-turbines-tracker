@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, createContext } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const url = "https://eersc.usgs.gov/api/uswtdb/v1/turbines?&limit=100";
 
@@ -16,32 +16,33 @@ const MapProvider = ({ children }) => {
         const response = await fetch(url);
         const data = await response.json();
         if (data) {
-          const windmills = data.map((item) => {
-            const {
+          const windmills = data.map(
+            ({
               case_id: id,
               p_name: name,
               t_state: state,
               t_county: county,
               p_year: year,
-              t_cap: capacity,
+              t_cap: capacityCumulative,
+              p_cap: capacityTurbine,
               t_hh: height,
               xlong: lng,
               ylat: lat,
-            } = item;
-
-            const newList = {
-              id,
-              name,
-              state,
-              county,
-              year,
-              capacity,
-              height,
-              lng,
-              lat,
-            };
-            return newList;
-          });
+            }) => {
+              return {
+                id,
+                name,
+                state,
+                county,
+                year,
+                capacityCumulative,
+                capacityTurbine,
+                height,
+                lng,
+                lat,
+              };
+            }
+          );
           setMapData(windmills);
         } else {
           setMapData([]);

@@ -1,8 +1,9 @@
+import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import React from "react";
-import { GoogleMap, LoadScript, InfoWindow } from "@react-google-maps/api";
-import mapStyles from "./MapStyles";
 import { useMapContext } from "../context/mapContext";
+import Heading from "./Heading";
 import InfoBox from "./InfoBox";
+import mapStyles from "./MapStyles";
 import WindMill from "./WindMill";
 
 const containerStyle = {
@@ -20,12 +21,8 @@ const options = {
   zoomControl: true,
 };
 
-const iconOptions = {
-  url: "/windmill.svg",
-};
-
 const Map = () => {
-  const { loading, mapData, selectedMill, setSelectedMill } = useMapContext();
+  const { mapData, selectedMill, setSelectedMill } = useMapContext();
 
   return (
     <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_KEY}>
@@ -35,6 +32,7 @@ const Map = () => {
         zoom={4}
         options={options}
       >
+        <Heading />
         {mapData.map((item) => (
           <WindMill
             key={item.id}
@@ -49,24 +47,3 @@ const Map = () => {
 };
 
 export default React.memo(Map);
-
-/* return (
-  <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_KEY}>
-    <GoogleMap
-      mapContainerStyle={containerStyle}
-      center={center}
-      zoom={6}
-      onLoad={onLoad}
-      onUnmount={onUnmount}
-      options={options}
-    >
-      <Marker
-        position={position}
-        label={text}
-        icon={{
-          url: `/bear.svg`,
-        }}
-      />
-    </GoogleMap>
-  </LoadScript>
-); */

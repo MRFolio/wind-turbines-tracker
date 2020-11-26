@@ -1,4 +1,4 @@
-const abbrState = (input, to) => {
+const convertState = (state) => {
   const states = [
     ["Arizona", "AZ"],
     ["Alabama", "AL"],
@@ -52,21 +52,13 @@ const abbrState = (input, to) => {
     ["Wyoming", "WY"],
   ];
 
-  if (to == "abbr") {
-    input = input.replace(/\w\S*/g, function (txt) {
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    });
-    for (i = 0; i < states.length; i++) {
-      if (states[i][0] == input) {
-        return states[i][1];
-      }
-    }
-  } else if (to == "name") {
-    input = input.toUpperCase();
-    for (i = 0; i < states.length; i++) {
-      if (states[i][1] == input) {
-        return states[i][0];
-      }
-    }
-  }
+  const selectedState = states.find((s) =>
+    s.find((x) => x.toLowerCase() === state.toLowerCase())
+  );
+  if (!selectedState) return null;
+  return selectedState
+    .filter((s) => s.toLowerCase() !== state.toLowerCase())
+    .join("");
 };
+
+export default convertState;

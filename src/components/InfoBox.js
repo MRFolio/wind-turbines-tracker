@@ -1,26 +1,54 @@
-import { useMapContext } from "../context/mapContext";
 import { InfoWindow } from "@react-google-maps/api";
+import { useMapContext } from "../context/mapContext";
+import convertState from "../utils/convertState";
 
 const InfoBox = () => {
   const { selectedMill, setSelectedMill } = useMapContext();
 
+  const {
+    name = "Windshear II",
+    state = "CA",
+    county = "RiverSide County",
+    year = 1995,
+    capacityCumulative = 1200,
+    capacityTurbine = 20,
+    height = 80,
+    lng,
+    lat,
+  } = selectedMill;
+
   const handleClose = () => setSelectedMill(null);
   const position = {
-    lat: selectedMill.lat,
-    lng: selectedMill.lng,
+    lat,
+    lng,
   };
+
+  const fullStateName = convertState(state);
 
   return (
     <InfoWindow position={position} onCloseClick={handleClose}>
-      <div>
-        <h2>{selectedMill.name}</h2>
-        <p>{selectedMill.status}</p>
-        <p>
-          {selectedMill.county}, {selectedMill.state}
-        </p>
-        <p>{selectedMill.year}</p>
-        <p>{selectedMill.capacity} MW</p>
-        <p>{selectedMill.height} meters</p>
+      <div className="infoBox">
+        <h2 className="boxTitle">{name}</h2>
+        <ul className="list">
+          <li className="listItem">
+            <strong>Location: </strong>
+            {county}, {fullStateName}
+          </li>
+          <li className="listItem">
+            <strong>Year became operational:</strong> {year}
+          </li>
+          <li className="listItem">
+            <strong>Wind farm cumulative capacity: </strong>
+            {capacityCumulative} MW
+          </li>
+          <li className="listItem">
+            <strong>Turbine capacity: </strong>
+            {capacityTurbine} kW
+          </li>
+          <li className="listItem">
+            <strong>Turbine hub height:</strong> {height} meters
+          </li>
+        </ul>
       </div>
     </InfoWindow>
   );
