@@ -1,30 +1,11 @@
 import { useState } from "react";
 import { FaExclamationCircle } from "react-icons/fa";
-import { useMapContext } from "../context/mapContext";
+import windMillIcon from "../images/windmill.svg";
 import CollapseButton from "./CollapseButton";
-
-const sumReducer = (sum, value) => sum + value;
-
-const reducer = (windFarms) =>
-  windFarms
-    .map((windmill) => windmill.capacityTurbine)
-    .reduce(sumReducer, 0)
-    .toFixed();
-
-const averageAge = (windFarms) => {
-  const windmillAges = parseInt(
-    windFarms.map((windmill) => windmill.year).reduce(sumReducer, 0) /
-      windFarms.length,
-    10
-  );
-  const currentDate = new Date().getFullYear();
-  const averageAge = currentDate - windmillAges;
-  return averageAge;
-};
+import HeadingItems from "./HeadingItems";
 
 const Heading = () => {
   const [headingOpen, setHeadingOpen] = useState(true);
-  const { mapData } = useMapContext();
 
   return (
     <>
@@ -41,28 +22,19 @@ const Heading = () => {
           />
           <h2 className="title">Wind turbines in the U.S.</h2>
           <ul className="info-container">
-            <li>
-              <strong>Total number: </strong> {mapData.length}
-            </li>
-            <li>
-              <strong>Average age: </strong>
-              {averageAge(mapData)} years
-            </li>
-            <li>
-              <strong>Sum capacity: </strong>
-              {reducer(mapData) / 1000} MW
-            </li>
+            <HeadingItems />
           </ul>
           <p className="click-instructions">
             Click on the
             <img
-              src="/windmill.svg"
-              alt="Windmill icon"
-              title="Windmill icon shown on the map"
+              src={windMillIcon}
+              alt="Wind turbine icon"
+              title="The windmill icon shown on the map"
               aria-label="This is a windmill icon shown on the map"
+              className="turbine-img"
             />
-            icon for detailed information
-            <span>
+            icon for details
+            <span className="icon" aria-label="exclamation mark">
               <FaExclamationCircle className="icon" />
             </span>
           </p>

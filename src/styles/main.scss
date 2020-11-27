@@ -1,52 +1,89 @@
 @use "base";
 
-$border: 1px solid green;
+// VARIABLES
+$background: rgba(255, 255, 255, 0.94);
+
+// MIXINS
+@mixin border($width: 1px) {
+  border: $width solid green;
+}
+@mixin border-bottom($width: 1px) {
+  border-bottom: $width solid green;
+}
+
+@mixin for-mobile {
+  @media only screen and (max-width: 576px) {
+    @content;
+  }
+}
 
 .heading {
   position: absolute;
   top: 0.25em;
   left: 0.25em;
   color: rgb(15, 15, 15);
-  background: rgba(255, 255, 255, 0.675);
+  background: $background;
   border-radius: 0.2em;
   padding: 0.375em;
+  z-index: 0;
+
+  @include for-mobile {
+    min-width: 98vw;
+    background: $background;
+  }
 
   .title {
     margin-bottom: 0.25em;
     padding: 0.15em;
-    border-bottom: $border;
     text-align: center;
+    @include border-bottom;
+
+    @include for-mobile {
+      text-align: left;
+    }
   }
 
   .info-container {
     > li {
       display: flex;
       justify-content: space-between;
+      flex-wrap: wrap;
       margin: 0.2em;
+      padding: 0.2em;
+
+      &:nth-of-type(odd) {
+        background-color: rgba($color: #000000, $alpha: 0.06);
+      }
     }
   }
 
   .click-instructions {
-    margin-top: 0.25em;
+    margin-top: 0.35em;
     margin-bottom: 0.15em;
-    padding: 0.25em 0.15em;
-    border-top: $border;
-  }
+    padding: 0.2em 0.35em;
+    border-radius: 0.3em;
+    background: rgba(0, 0, 0, 0.05);
+    font-weight: bold;
+    text-align: center;
+    @include border;
 
-  .icon {
-    color: rgb(59, 192, 181);
-    margin-left: 0.1em;
-    transform: translateY(11%);
-  }
-}
+    .turbine-img {
+      background: rgba($color: #4d6059, $alpha: 0.85);
+      border-radius: 0.2em;
+      transform: translateY(5%);
+      margin: 0 0.25em;
+      padding: 0.2em;
+    }
 
-.locate {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: none;
-  border: none;
-  z-index: 10;
+    .icon {
+      color: rgb(56, 117, 148);
+      margin-left: 0.1em;
+      transform: translateY(14%);
+    }
+    @include for-mobile {
+      font-size: 1rem;
+    }
+  }
 }
 
 .close-btn {
@@ -54,34 +91,48 @@ $border: 1px solid green;
   top: 0.15em;
   right: 0.15em;
   font-size: 1.3rem;
-  color: rgb(128, 130, 131);
+  color: rgb(56, 117, 148);
   display: flex;
   align-items: center;
   gap: 0.2em;
-  padding: 0.1em 0.4em;
+  padding: 0.18em 0.35em;
   transition: color 0.5s ease-out;
-  background: rgba(255, 255, 255, 0.875);
+  background: $background;
   border: none;
   border-radius: 4em;
   cursor: pointer;
+
   &:hover {
     color: rgb(58, 58, 57);
   }
+
   &:focus {
-    outline: 1px solid rgba($color: #c0b0a6, $alpha: 0.5);
+    outline: 2px solid rgba($color: #c0b0a6, $alpha: 0.5);
   }
 
   .info-text {
     font-size: 0.85rem;
     font-weight: bold;
   }
+
+  @include for-mobile {
+    top: 0.35em;
+    right: 0.35em;
+    background: rgb(32, 152, 233);
+    color: rgb(236, 236, 236);
+    font-size: 1.5rem;
+  }
+}
+
+.info-window {
+  background: red;
 }
 
 .boxTitle {
   margin: 0.25em;
   padding-bottom: 0.25em;
-  border-bottom: 1px solid green;
   font-size: 1.3rem;
+  @include border-bottom;
 }
 
 .list {
@@ -92,18 +143,21 @@ $border: 1px solid green;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    flex-wrap: wrap;
     gap: 0.5em;
-    padding: 0.1em;
+    padding: 0.2em;
     list-style-type: none;
     font-size: 1rem;
     font-weight: 400;
     letter-spacing: 0.015em;
-  }
-}
 
-.marker {
-  position: relative;
-  z-index: 100;
+    &:not(:first-child) {
+      border-top: 1px solid #d1d1d1;
+    }
+    &:nth-of-type(odd) {
+      background-color: rgba($color: #000000, $alpha: 0.05);
+    }
+  }
 }
 
 .spinner {
