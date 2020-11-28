@@ -28,13 +28,13 @@ const mapStyles = [
         saturation: 36,
       },
       {
-        color: "#000000",
+        color: "#7b7b7b",
       },
       {
-        lightness: 40,
+        lightness: 1,
       },
       {
-        visibility: "off",
+        visibility: "on",
       },
     ],
   },
@@ -46,10 +46,10 @@ const mapStyles = [
         visibility: "off",
       },
       {
-        color: "#000000",
+        color: "#b2d6b8",
       },
       {
-        lightness: 16,
+        lightness: 1,
       },
     ],
   },

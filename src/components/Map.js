@@ -1,9 +1,9 @@
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import { memo } from "react";
 import { useMapContext } from "../context/mapContext";
+import { mapStyles } from "../utils";
 import Heading from "./Heading";
 import InfoBox from "./InfoBox";
-import mapStyles from "./MapStyles";
 import WindTurbine from "./WindTurbine";
 
 const containerStyle = {
@@ -33,11 +33,11 @@ const Map = () => {
         options={options}
       >
         <Heading />
-        {mapData.map((item) => (
+        {mapData.map((turbine) => (
           <WindTurbine
-            key={item.id}
-            {...item}
-            onClick={() => setSelectedMill(item)}
+            key={turbine.id}
+            {...turbine}
+            onClick={() => setSelectedMill(turbine)}
           />
         ))}
         {selectedMill && <InfoBox />}

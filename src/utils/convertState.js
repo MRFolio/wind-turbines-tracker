@@ -56,9 +56,8 @@ const convertState = (state) => {
     s.find((x) => x.toLowerCase() === state.toLowerCase())
   );
   if (!selectedState) return null;
-  return selectedState
-    .filter((s) => s.toLowerCase() !== state.toLowerCase())
-    .join("");
+
+  return selectedState.filter((s) => s.toLowerCase() !== state.toLowerCase());
 };
 
 export default convertState;

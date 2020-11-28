@@ -1,9 +1,11 @@
 import { InfoWindow } from "@react-google-maps/api";
+import { useState } from "react";
 import { useMapContext } from "../context/mapContext";
 import InfoItem from "./InfoItem";
 
 const InfoBox = () => {
   const { selectedMill, setSelectedMill } = useMapContext();
+  const [isCopied, setIsCopied] = useState(false);
 
   const options = {
     minWidth: 320,
@@ -13,25 +15,29 @@ const InfoBox = () => {
     },
   };
 
-  let { name, lng, lat } = selectedMill;
+  const { name, lng, lat } = selectedMill;
 
-  let position = {
+  const position = {
     lat,
     lng,
   };
 
-  const handleClose = () => setSelectedMill(null);
+  const handleClose = () => {
+    setSelectedMill(null);
+    setIsCopied(false);
+  };
 
   return (
     <InfoWindow
       position={position}
       onCloseClick={handleClose}
       options={options}
+      zIndex={10}
     >
       <div className="infoBox">
         <h2 className="boxTitle">{name}</h2>
         <ul className="list">
-          <InfoItem />
+          <InfoItem setIsCopied={setIsCopied} isCopied={isCopied} />
         </ul>
       </div>
     </InfoWindow>

@@ -3,25 +3,35 @@ import { useMapContext } from "../context/mapContext";
 const sumReducer = (sum, value) => sum + value;
 const getYear = (item) => item.year;
 const getHeight = (item) => item.height;
-const getCapacity = (item) => item.capacityTurbine;
+const getCapacity = (item) => item.capacity;
+const filterItems = (items, parameter) =>
+  items.filter((item) => item[parameter]);
+
+/* const filteredMaps = (windFarms) => {
+  return windFarms.filter((windfarm) => windfarm.height);
+}; */
 
 const addCapacities = (windFarms) =>
   windFarms.map(getCapacity).reduce(sumReducer, 0).toFixed();
 
 const averageAge = (windFarms) => {
-  const windmillAges = parseInt(
-    windFarms.map(getYear).reduce(sumReducer, 0) / windFarms.length,
+  const filteredYearList = filterItems(windFarms, "year");
+  const averageYear = parseInt(
+    filteredYearList.map(getYear).reduce(sumReducer, 0) /
+      filteredYearList.length,
     10
   );
   const currentDate = new Date().getFullYear();
-  const averageAge = currentDate - windmillAges;
-  return averageAge;
+  return currentDate - averageYear;
 };
-const averageHeight = (windFarms) =>
-  parseInt(
-    windFarms.map(getHeight).reduce(sumReducer, 0) / windFarms.length,
+const averageHeight = (windFarms) => {
+  const filteredHeightList = filterItems(windFarms, "height");
+  return parseInt(
+    filteredHeightList.map(getHeight).reduce(sumReducer, 0) /
+      filteredHeightList.length,
     10
   );
+};
 
 const HeadingItems = () => {
   const { mapData } = useMapContext();
@@ -40,8 +50,8 @@ const HeadingItems = () => {
         {averageHeight(mapData)} m
       </li>
       <li>
-        <strong>Sum capacity: </strong>
-        {addCapacities(mapData) / 1000} MW
+        <strong>Total rated capacity: </strong>~
+        {Math.round(addCapacities(mapData) / 1000)} MW
       </li>
     </>
   );

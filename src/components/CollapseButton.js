@@ -5,7 +5,7 @@ const CollapseButton = ({ headingOpen, setHeadingOpen }) => {
     <button
       className="close-btn"
       title={headingOpen ? "Minimize heading" : "Show header"}
-      aria-label="Button to toggle map header from view"
+      aria-label="Button to toggle map header"
       onClick={() => setHeadingOpen(!headingOpen)}
     >
       <span className="info-text">
