@@ -1,9 +1,17 @@
-import { FaClipboard } from "react-icons/fa";
+import { useEffect } from "react";
+import { FaClipboard, FaClipboardCheck } from "react-icons/fa";
 import { useMapContext } from "../context/mapContext";
 import { convertState } from "../utils";
 
-const InfoItem = ({ isCopied, setIsCopied }) => {
-  const { selectedMill } = useMapContext();
+const InfoItem = () => {
+  const { selectedMill, isCopied, setIsCopied } = useMapContext();
+
+  useEffect(() => {
+    if (!isCopied) return;
+    const timer = setTimeout(() => setIsCopied(false), 3000);
+    return () => clearTimeout(timer);
+  }, [isCopied, setIsCopied]);
+
   let {
     county,
     state,
@@ -23,19 +31,17 @@ const InfoItem = ({ isCopied, setIsCopied }) => {
     diameter = 90;
   }
 
-  /* useEffect(() => {
-    const updateClipboard = (newClip) => {
-      navigator.clipboard.writeText(newClip).then(
-        () => {
-          setIsCopied(!isCopied);
-        },
-        () => console.log("Copy to clipboard was not successful")
-      );
-    };
-  }, [isCopied]); */
+  const copyToClipboard = async (newClip) => {
+    try {
+      await navigator.clipboard.writeText(newClip);
+      setIsCopied(true);
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  };
 
   const fullStateName = convertState(state);
-  /* const forClipboard = `${lat.toString()}, ${lng.toString()}`; */
+  const forClipboard = `${lat.toString()}, ${lng.toString()}`;
 
   return (
     <>
@@ -57,13 +63,23 @@ const InfoItem = ({ isCopied, setIsCopied }) => {
         <strong>Turbine rated capacity: </strong>
         {Math.round(capacity)} kW
       </li>
-      <button /* onClick={updateClipboard(forClipboard)} */ className="copyBtn">
-        <span className="tooltiptext" id="myTooltip">
-          Copy exact coordinates to clipboard{" "}
-          {/* ({lat.toFixed(1)}...,{" "}
-          {lng.toFixed(1)}
-          ...) */}{" "}
-          <FaClipboard className="iconClipBoard" />
+      <button
+        onClick={() => copyToClipboard(forClipboard)}
+        className={`copyBtn ${isCopied && "success"}`}
+        aria-label="Clickable button to copy exact geographical coordinates to clipboard"
+      >
+        <span>
+          {!isCopied ? (
+            <>
+              Copy exact coordinates to clipboard
+              <FaClipboard className="iconClipBoard" />
+            </>
+          ) : (
+            <>
+              Successfully copied!
+              <FaClipboardCheck className="iconClipBoard" />
+            </>
+          )}
         </span>
       </button>
     </>

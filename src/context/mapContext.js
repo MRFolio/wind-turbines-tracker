@@ -3,11 +3,13 @@ import { createContext, useContext, useEffect, useState } from "react";
 const url = "https://eersc.usgs.gov/api/uswtdb/v1/turbines?&limit=100";
 
 const MapContext = createContext();
+const { Provider } = MapContext;
 
 const MapProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [mapData, setMapData] = useState([]);
   const [selectedMill, setSelectedMill] = useState(null);
+  const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,12 +58,22 @@ const MapProvider = ({ children }) => {
     fetchData();
   }, []);
 
+  const handleCloseClick = () => setIsCopied(false);
+
   return (
-    <MapContext.Provider
-      value={{ loading, mapData, selectedMill, setSelectedMill }}
+    <Provider
+      value={{
+        loading,
+        mapData,
+        selectedMill,
+        isCopied,
+        setIsCopied,
+        setSelectedMill,
+        handleCloseClick,
+      }}
     >
       {children}
-    </MapContext.Provider>
+    </Provider>
   );
 };
 //custom hook

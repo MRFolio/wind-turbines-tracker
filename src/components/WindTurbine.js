@@ -13,8 +13,6 @@ const WindTurbine = ({ lat, lng, onClick }) => (
     icon={iconOptions}
     onClick={onClick}
     animation={2}
-    /* onHover={console.log(item)} */
-    /* getClickable */
   />
 );
 

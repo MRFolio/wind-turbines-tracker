@@ -22,7 +22,17 @@ const options = {
 };
 
 const Map = () => {
-  const { mapData, selectedMill, setSelectedMill } = useMapContext();
+  const {
+    mapData,
+    selectedMill,
+    setSelectedMill,
+    handleCloseClick,
+  } = useMapContext();
+
+  const handleClick = (selectedTurbine) => {
+    setSelectedMill(selectedTurbine);
+    handleCloseClick();
+  };
 
   return (
     <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_KEY}>
@@ -37,7 +47,7 @@ const Map = () => {
           <WindTurbine
             key={turbine.id}
             {...turbine}
-            onClick={() => setSelectedMill(turbine)}
+            onClick={() => handleClick(turbine)}
           />
         ))}
         {selectedMill && <InfoBox />}
