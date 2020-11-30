@@ -1,8 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-const url = "https://eersc.usgs.gov/api/uswtdb/v1/turbines?&limit=100";
+const url = "https://eersc.usgs.gov/api/uswtdb/v1/turbines?&t_state=eq.AK";
 
-const MapContext = createContext();
+const MapContext = createContext(null);
 const { Provider } = MapContext;
 
 const MapProvider = ({ children }) => {
@@ -10,6 +10,7 @@ const MapProvider = ({ children }) => {
   const [mapData, setMapData] = useState([]);
   const [selectedMill, setSelectedMill] = useState(null);
   const [isCopied, setIsCopied] = useState(false);
+  const [headingOpen, setHeadingOpen] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +26,7 @@ const MapProvider = ({ children }) => {
               t_state: state,
               t_county: county,
               p_year: year,
-              p_cap: capacity,
+              t_cap: capacity,
               t_rd: diameter,
               t_ttlh: height,
               xlong: lng,
@@ -59,6 +60,8 @@ const MapProvider = ({ children }) => {
   }, []);
 
   const handleCloseClick = () => setIsCopied(false);
+  const handleHeadingToggle = () => setHeadingOpen(!headingOpen);
+  const handleHeadingClose = () => setHeadingOpen(false);
 
   return (
     <Provider
@@ -67,9 +70,13 @@ const MapProvider = ({ children }) => {
         mapData,
         selectedMill,
         isCopied,
+        headingOpen,
         setIsCopied,
         setSelectedMill,
+        setHeadingOpen,
         handleCloseClick,
+        handleHeadingClose,
+        handleHeadingToggle,
       }}
     >
       {children}

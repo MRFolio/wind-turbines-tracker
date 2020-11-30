@@ -4,7 +4,5 @@
 
 ### API's used:
 
-- Maps JavaScript API
+- Google Maps JavaScript API
 - U.S. Geological Survey API
-
----

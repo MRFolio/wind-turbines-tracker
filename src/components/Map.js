@@ -12,9 +12,10 @@ const containerStyle = {
 };
 
 const center = {
-  lat: 38.359461829793624,
-  lng: -100.33554040588162,
+  lat: 64.77816373194928,
+  lng: -156.0464243475145,
 };
+
 const options = {
   styles: mapStyles,
   disableDefaultUI: true,
@@ -27,11 +28,13 @@ const Map = () => {
     selectedMill,
     setSelectedMill,
     handleCloseClick,
+    handleHeadingClose,
   } = useMapContext();
 
   const handleClick = (selectedTurbine) => {
     setSelectedMill(selectedTurbine);
     handleCloseClick();
+    handleHeadingClose();
   };
 
   return (

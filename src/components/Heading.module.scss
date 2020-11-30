@@ -1,0 +1,70 @@
+@use "../styles/base" as b;
+
+.heading {
+  position: absolute;
+  top: 0.15em;
+  left: 0.15em;
+  color: rgb(15, 15, 15);
+  background: b.$background;
+  border-radius: 0.2em;
+  padding: 0.2em 0.5em;
+  z-index: 0;
+
+  @include b.for-mobile {
+    min-width: 99vw;
+  }
+
+  .title {
+    margin-bottom: 0.25em;
+    padding: 0.15em;
+    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    @include b.border-bottom;
+
+    @include b.for-mobile {
+      white-space: pre-line;
+      text-align: left;
+      display: block;
+    }
+
+    @include b.for-smaller-mobile {
+      text-align: center;
+      margin: 0.125em 0;
+    }
+  }
+
+  .click-instructions {
+    margin: 0.1em 0;
+    padding: 0.3em;
+    border-radius: 0.3em;
+    background: rgba(0, 0, 0, 0.05);
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    border: 3px double green;
+
+    .turbine-img {
+      background: rgba($color: #4d6059, $alpha: 0.9);
+      border-radius: 0.2em;
+      transform: translateY(0%);
+      margin: 0em 0.2em;
+      padding: 0.11em;
+    }
+
+    .icon {
+      color: b.$highlightColor;
+      margin-left: 0.1em;
+      transform: translateY(12%);
+    }
+
+    @include b.for-mobile {
+      font-size: 1rem;
+    }
+  }
+}

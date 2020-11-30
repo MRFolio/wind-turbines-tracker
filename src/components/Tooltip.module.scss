@@ -1,3 +1,5 @@
+@use "../styles/base" as b;
+
 .tooltip {
   position: relative; /* making the .tooltip span a container for the tooltip text */
   border-bottom: 1px dashed #000; /* little indicater to indicate it's hoverable */
@@ -23,6 +25,10 @@
     letter-spacing: 0.015em;
     display: none;
     opacity: 0;
+
+    @include b.for-mobile {
+      width: 200px;
+    }
   }
 
   &:after {
@@ -45,5 +51,11 @@
   &:hover:after {
     display: block;
     opacity: 1;
+  }
+
+  .icon {
+    color: b.$highlightColor;
+    margin-left: 0.1em;
+    transform: translateY(12%);
   }
 }

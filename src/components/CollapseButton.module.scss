@@ -1,0 +1,45 @@
+@use "../styles/base" as b;
+
+.close-btn {
+  position: fixed;
+  top: 0.15em;
+  right: 0.15em;
+  font-size: 1.3rem;
+  color: b.$highlightColor;
+  display: flex;
+  align-items: center;
+  gap: 0.2em;
+  padding: 0.2em 0.4em;
+  transition: color 0.5s ease-out;
+  background: b.$background;
+  border: none;
+  border-radius: 4em;
+  z-index: 10;
+  cursor: pointer;
+
+  &:hover {
+    color: rgb(219, 70, 57);
+  }
+
+  &:focus {
+    outline: 2px solid rgba($color: #c0b0a6, $alpha: 0.5);
+  }
+
+  .info-text {
+    font-size: 0.88rem;
+    font-weight: bold;
+  }
+
+  @include b.for-mobile {
+    top: 0.32em;
+    right: 0.3em;
+    background: rgb(32, 152, 233);
+    color: rgb(236, 236, 236);
+  }
+
+  @include b.for-smaller-mobile {
+    top: 0.32em;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

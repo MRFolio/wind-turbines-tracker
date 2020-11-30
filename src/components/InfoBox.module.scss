@@ -1,0 +1,12 @@
+@use "../styles/base" as b;
+
+.boxTitle {
+  margin: 0.18em;
+  font-size: 1.3rem;
+  @include b.border-bottom;
+}
+
+.list {
+  line-height: 1.5;
+  padding: 0.1em;
+}

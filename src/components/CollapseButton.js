@@ -1,14 +1,18 @@
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useMapContext } from "../context/mapContext";
+import styles from "./CollapseButton.module.scss";
 
-const CollapseButton = ({ headingOpen, setHeadingOpen }) => {
+const CollapseButton = () => {
+  const { headingOpen, handleHeadingToggle } = useMapContext();
+
   return (
     <button
-      className="close-btn"
+      className={styles["close-btn"]}
       title={headingOpen ? "Minimize heading" : "Show header"}
       aria-label="Button to toggle map header"
-      onClick={() => setHeadingOpen(!headingOpen)}
+      onClick={handleHeadingToggle}
     >
-      <span className="info-text">
+      <span className={styles["info-text"]}>
         {headingOpen ? "Hide header" : "Show header"}
       </span>
       {headingOpen ? <FaEyeSlash /> : <FaEye />}

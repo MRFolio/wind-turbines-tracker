@@ -1,15 +1,13 @@
 import { useMapContext } from "../context/mapContext";
+import styles from "./HeadingItems.module.scss";
 
 const sumReducer = (sum, value) => sum + value;
 const getYear = (item) => item.year;
 const getHeight = (item) => item.height;
 const getCapacity = (item) => item.capacity;
+
 const filterItems = (items, parameter) =>
   items.filter((item) => item[parameter]);
-
-/* const filteredMaps = (windFarms) => {
-  return windFarms.filter((windfarm) => windfarm.height);
-}; */
 
 const addCapacities = (windFarms) =>
   windFarms.map(getCapacity).reduce(sumReducer, 0).toFixed();
@@ -38,7 +36,7 @@ const HeadingItems = () => {
 
   return (
     <>
-      <li>
+      <li className={styles}>
         <strong>Total number: </strong> {mapData.length}
       </li>
       <li>
@@ -50,7 +48,7 @@ const HeadingItems = () => {
         {averageHeight(mapData)} m
       </li>
       <li>
-        <strong>Total rated capacity: </strong>~
+        <strong>Total rated capacity: </strong>
         {Math.round(addCapacities(mapData) / 1000)} MW
       </li>
     </>

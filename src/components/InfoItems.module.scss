@@ -1,0 +1,56 @@
+@use "../styles/base" as b;
+
+@mixin copyBtn($bg-color) {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0.4em auto 0em;
+  padding: 0.26em;
+  border-radius: 0.3em;
+  background: $bg-color;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  transition: background 0.65s ease-out;
+  @include b.border(1px);
+
+  &:focus {
+    outline: 1px solid green;
+  }
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  padding: 0.2em;
+  margin: 0;
+  list-style-type: none;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.015em;
+
+  &:not(:first-child) {
+    border-top: 1px solid #d1d1d1;
+  }
+  &:nth-of-type(odd) {
+    background-color: rgba($color: #000000, $alpha: 0.05);
+  }
+}
+
+.copyBtn {
+  @include copyBtn(rgba(0, 0, 0, 0.05));
+}
+
+.copyBtnSuccess {
+  @include copyBtn(rgba($color: #4bb543, $alpha: 0.6));
+}
+
+.iconClipBoard {
+  color: rgb(32, 152, 233);
+  transform: translateY(12%);
+  font-size: 1.25rem;
+}
