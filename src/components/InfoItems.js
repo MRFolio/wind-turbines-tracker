@@ -73,19 +73,17 @@ const InfoItem = () => {
         className={styles[`copyBtn${isCopied ? "Success" : ""}`]}
         aria-label="Clickable button to copy exact geographical coordinates to clipboard"
       >
-        <span>
-          {!isCopied ? (
-            <>
-              Copy coordinates to clipboard
-              <FaClipboard className={styles.iconClipBoard} />
-            </>
-          ) : (
-            <>
-              Successfully copied!
-              <FaClipboardCheck className={styles.iconClipBoard} />
-            </>
-          )}
-        </span>
+        {!isCopied ? (
+          <>
+            Copy coordinates to clipboard
+            <FaClipboard className={styles.iconClipBoard} />
+          </>
+        ) : (
+          <>
+            Successfully copied!
+            <FaClipboardCheck className={styles.iconClipBoard} />
+          </>
+        )}
       </button>
     </>
   );

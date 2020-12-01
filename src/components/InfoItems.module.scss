@@ -1,4 +1,4 @@
-@use "../styles/base" as b;
+@use "../styles/main" as b;
 
 @mixin copyBtn($bg-color) {
   font-size: 1rem;
@@ -21,10 +21,6 @@
 }
 
 .listItem {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  flex-wrap: wrap;
   gap: 0.5em;
   padding: 0.2em;
   margin: 0;
@@ -51,6 +47,6 @@
 
 .iconClipBoard {
   color: rgb(32, 152, 233);
-  transform: translateY(12%);
+  transform: translateY(-10%);
   font-size: 1.25rem;
 }

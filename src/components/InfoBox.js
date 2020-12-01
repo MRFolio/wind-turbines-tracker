@@ -1,7 +1,7 @@
 import { InfoWindow } from "@react-google-maps/api";
 import { useMapContext } from "../context/mapContext";
 import styles from "./InfoBox.module.scss";
-import InfoItem from "./InfoItems";
+import InfoItems from "./InfoItems";
 
 const InfoBox = () => {
   const { selectedMill, setSelectedMill, handleCloseClick } = useMapContext();
@@ -36,7 +36,7 @@ const InfoBox = () => {
       <div className={styles.infoBox}>
         <h2 className={styles.boxTitle}>{name}</h2>
         <ul className={styles.list}>
-          <InfoItem />
+          <InfoItems />
         </ul>
       </div>
     </InfoWindow>

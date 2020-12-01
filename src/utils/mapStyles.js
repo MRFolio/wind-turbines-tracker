@@ -28,7 +28,7 @@ const mapStyles = [
         saturation: 36,
       },
       {
-        color: "#7b7b7b",
+        color: "#000000",
       },
       {
         lightness: 1,
@@ -49,7 +49,7 @@ const mapStyles = [
         color: "#F1D9A7",
       },
       {
-        lightness: 75,
+        lightness: 50,
       },
     ],
   },
