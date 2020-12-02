@@ -38,6 +38,7 @@
 }
 
 .copyBtn {
+  cursor: pointer;
   @include copyBtn(rgba(0, 0, 0, 0.05));
 }
 
