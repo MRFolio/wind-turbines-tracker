@@ -33,7 +33,7 @@ const InfoBox = () => {
       options={options}
       zIndex={10}
     >
-      <div className={styles.infoBox}>
+      <div>
         <h2 className={styles.boxTitle}>{name}</h2>
         <ul className={styles.list}>
           <InfoItems />

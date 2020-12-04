@@ -40,6 +40,7 @@ const Map = () => {
   return (
     <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_KEY}>
       <GoogleMap
+        id="map"
         mapContainerStyle={containerStyle}
         center={center}
         zoom={4}

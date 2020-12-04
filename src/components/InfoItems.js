@@ -4,6 +4,10 @@ import { useMapContext } from "../context/mapContext";
 import { convertState, getRandomNumber } from "../utils";
 import styles from "./InfoItems.module.scss";
 
+const tempHeight = getRandomNumber(68, 138);
+const tempDiameter = getRandomNumber(60, 100);
+const tempCapacity = getRandomNumber(220, 960);
+
 const InfoItem = () => {
   const { selectedMill, isCopied, setIsCopied } = useMapContext();
 
@@ -23,18 +27,6 @@ const InfoItem = () => {
     lat,
     lng,
   } = selectedMill;
-
-  if (!height) {
-    height = getRandomNumber(68, 138);
-  }
-
-  if (!diameter) {
-    diameter = getRandomNumber(60, 100);
-  }
-
-  if (!capacity) {
-    capacity = getRandomNumber(100, 960);
-  }
 
   const copyToClipboard = async (newClip) => {
     try {
@@ -59,14 +51,15 @@ const InfoItem = () => {
       </li>
       <li className={styles.listItem}>
         <strong>Turbine rotor diameter: </strong>
-        {diameter} m
+        {diameter || tempDiameter} m
       </li>
       <li className={styles.listItem}>
-        <strong>Turbine total height:</strong> {Math.round(height)} m
+        <strong>Turbine total height:</strong>{" "}
+        {Math.round(height) || tempHeight} m
       </li>
       <li className={styles.listItem}>
         <strong>Turbine rated capacity: </strong>
-        {/* Math.round */ capacity} kW
+        {capacity || tempCapacity} kW
       </li>
       <button
         onClick={() => copyToClipboard(forClipboard)}
