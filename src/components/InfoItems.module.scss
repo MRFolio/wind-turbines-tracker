@@ -4,7 +4,7 @@
   font-size: 1rem;
   font-weight: bold;
   margin: 0.4em auto 0em;
-  padding: 0.26em;
+  padding: 0.5em;
   border-radius: 0.3em;
   background: $bg-color;
   text-align: center;
@@ -22,7 +22,7 @@
 
 .listItem {
   gap: 0.5em;
-  padding: 0.2em;
+  padding: 0.3em;
   margin: 0;
   list-style-type: none;
   font-size: 1rem;
@@ -50,4 +50,5 @@
   color: rgb(32, 152, 233);
   transform: translateY(-10%);
   font-size: 1.25rem;
+  background: rgba($color: #4bb543, $alpha: 0.15);
 }
