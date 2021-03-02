@@ -1,6 +1,6 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from 'react';
 
-const url = "https://eersc.usgs.gov/api/uswtdb/v1/turbines?&t_state=eq.AK";
+const url = 'https://eersc.usgs.gov/api/uswtdb/v1/turbines?&t_state=eq.AK';
 
 const MapContext = createContext(null);
 const { Provider } = MapContext;
@@ -31,20 +31,18 @@ const MapProvider = ({ children }) => {
               t_ttlh: height,
               xlong: lng,
               ylat: lat,
-            }) => {
-              return {
-                id,
-                name,
-                state,
-                county,
-                year,
-                capacity,
-                diameter,
-                height,
-                lng,
-                lat,
-              };
-            }
+            }) => ({
+              id,
+              name,
+              state,
+              county,
+              year,
+              capacity,
+              diameter,
+              height,
+              lng,
+              lat,
+            })
           );
           setMapData(windmills);
         } else {
